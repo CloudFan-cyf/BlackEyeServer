@@ -105,6 +105,12 @@ wssEsp.on('connection', function connection(ws) {
             if (dataType === 0x01) {
                 lastFrame = data;
             }
+            //for test:print pose data
+            if(dataType === 0x03){
+                //console.log(data.toString());
+                
+
+            }
 
             // Send the frame or audio to all connected user clients immediately
             wssUser.clients.forEach(client => {
@@ -113,7 +119,7 @@ wssEsp.on('connection', function connection(ws) {
                 }
             });
         } else {
-            console.log('ESP32 sent text:', message.toString()); // 使用 toString() 确保以文本形式输出
+            //console.log('ESP32 sent text:', message.toString()); // 使用 toString() 确保以文本形式输出
             // Forward battery data or other text data to all connected users
             wssUser.clients.forEach(client => {
                  if (client.readyState === WebSocket.OPEN) {
